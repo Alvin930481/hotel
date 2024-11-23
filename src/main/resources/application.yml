@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: hotel
+  #spring mongodb
+  data:
+    mongodb:
+      uri: mongodb+srv://alvin930490:ddFCQqJzgaOc3j87@cluster0.qwysd.mongodb.net/hotel_sys?retryWrites=true&w=majority&appName=Cluster0
+
+#swagger
+springdoc:
+  api-docs:
+    path: /api-docs  # OpenAPI JSON 
+  swagger-ui:
+    path: /swagger-ui.html  # Swagger UI ????
+    enabled: true           # ????? 
+
+
+
+

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,10 +14,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document
-public class Orders {
+@Document(collection = "orders")
+public class OrdersPO {
     @Id
-    private Integer id;
+    private ObjectId id;
     private Integer roomId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
@@ -24,5 +25,5 @@ public class Orders {
     private Integer OderUserId;
     private Integer status;
     //TODO
-    private User userInfo;
+    private UserPO userInfo;
 }
