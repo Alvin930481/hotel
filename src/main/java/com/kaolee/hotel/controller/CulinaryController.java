@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/news")
-public class News {
+@RequestMapping("/api/v1/culinary")
+public class CulinaryController {
 }

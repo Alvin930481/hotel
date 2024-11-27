@@ -1,7 +1,7 @@
 package com.kaolee.hotel;
 
 import com.kaolee.hotel.pojo.po.UserPO;
-import com.kaolee.hotel.repository.MyFirstRepository;
+import com.kaolee.hotel.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ public class RepositoryTest {
 
 
         @Autowired
-        private MyFirstRepository testDataRepository;
+        private UserRepository testDataRepository;
 
         @Test
         public void testMongoConnection() {

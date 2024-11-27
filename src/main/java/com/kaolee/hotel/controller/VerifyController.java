@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/rooms")
-public class Room {
+@RequestMapping("/api/v1/Verify")
+public class VerifyController {
 }
