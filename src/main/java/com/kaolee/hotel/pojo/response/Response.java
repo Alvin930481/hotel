@@ -11,7 +11,7 @@ public class Response<T> {
     private String message;
     private T result;
 
-    // 保持之前的靜態工廠方法不變
+
     public static <T> Response<T> success(T result) {
         Response<T> response = new Response<>();
         response.setStatus(true);

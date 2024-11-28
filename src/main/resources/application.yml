@@ -14,6 +14,14 @@ springdoc:
     path: /swagger-ui.html  # Swagger UI ????
     enabled: true           # ?????
 
+kaolee:
+  jwt:
+    # 設置jwt簽章加密時使用的密鑰
+    user-secret-key: a-very-long-and-secure-secret-key-kaolee
+    # 配置jwt過期时间
+    user-ttl: 7200000
+    # 配置前端傳遞過來的令牌名稱
+    user-token-name: token
 
 
 

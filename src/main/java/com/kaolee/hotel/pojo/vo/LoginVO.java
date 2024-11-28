@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -17,14 +18,13 @@ import java.time.LocalDate;
 @Builder
 public class LoginVO {
 
-
-        private ObjectId id;
+        private String id;
         private AddressPO address;
         private String name;
         private String email;
         private String phone;
         private LocalDate birthday;
-        private String password;
-        private String verificationToken;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
     }
 
