@@ -4,6 +4,7 @@ import com.kaolee.hotel.constant.JwtClaimsConstant;
 import com.kaolee.hotel.context.BaseContext;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
+import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
 import com.kaolee.hotel.pojo.po.UserPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
@@ -100,5 +101,16 @@ public class UserController {
         String currentId = BaseContext.getCurrentId();
         UserVO userVO = userService.getUser(currentId);
         return Response.success(userVO);
+    }
+
+
+    /**
+     * 更新使用者資訊
+     * @param userUpdateDTO
+     */
+    @Operation( tags = {"User-使用者"},summary = "更新使用者資訊")
+    @PutMapping
+    public void userUpdate(@RequestBody UserUpdateDTO userUpdateDTO){
+        userService.update(userUpdateDTO);
     }
 }

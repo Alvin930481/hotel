@@ -5,6 +5,9 @@ import com.kaolee.hotel.constant.MessageConstant;
 import com.kaolee.hotel.exception.EmailNotFoundException;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
+import com.kaolee.hotel.pojo.dto.UserUpdateAddressDTO;
+import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
+import com.kaolee.hotel.pojo.po.AddressPO;
 import com.kaolee.hotel.pojo.po.UserPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
@@ -16,6 +19,7 @@ import com.kaolee.hotel.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -91,5 +95,38 @@ public class UserServiceImpl implements UserService {
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userPO,userVO);
         return userVO;
+    }
+
+    /**
+     * 用戶更新
+     * @param userUpdateDTO
+     */
+    @Override
+    public void update(UserUpdateDTO userUpdateDTO) {
+        UserPO userPO = new UserPO();
+
+        //查詢舊密碼是否正確
+        //依照email查詢用戶
+        userPO = userRepository.findByEmail(userUpdateDTO.getEmail());
+        //如果查詢不到，表示沒有該用戶，返回“使用者不存在”
+        if (userPO==null){
+            throw new EmailNotFoundException(MessageConstant.USER_NOT_FOUND);
+        }
+        //如果有該用戶
+        //密碼不正確，返回“密碼錯誤”
+        String oldPassword = userUpdateDTO.getOldPassword();
+        String originPassword = userPO.getPassword();
+        if (!originPassword.equals(oldPassword)){
+            throw new EmailNotFoundException(MessageConstant.PASSWORD_IS_WRONG);
+        }
+        //TODO:有一個返回請重新登入，不知道作用。
+        //有該用戶且舊密碼正確，更新資訊
+        AddressPO addressPO = new AddressPO();
+        BeanUtils.copyProperties(userUpdateDTO.getAddress(),addressPO);
+        BeanUtils.copyProperties(userUpdateDTO, userPO);
+        userPO.setAddress(addressPO);
+        userPO.setId(userUpdateDTO.getUserId());
+        userPO.setPassword(userUpdateDTO.getNewPassword());
+        userRepository.save(userPO);
     }
 }

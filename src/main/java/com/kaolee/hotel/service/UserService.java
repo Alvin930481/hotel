@@ -2,6 +2,7 @@ package com.kaolee.hotel.service;
 
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
+import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
 import com.kaolee.hotel.pojo.vo.UserVO;
@@ -27,4 +28,10 @@ public interface UserService {
      * @return
      */
     UserVO getUser(String userId);
+
+    /**
+     * 用戶更新
+     * @param userUpdateDTO
+     */
+    void update(UserUpdateDTO userUpdateDTO);
 }
