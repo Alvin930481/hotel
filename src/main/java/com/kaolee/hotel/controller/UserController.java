@@ -39,8 +39,8 @@ public class UserController {
 
     @Operation( tags = {"User-使用者"},summary = "使用者註冊")
     @PostMapping("/signup")
-    public void signup(@RequestBody SignupDTO signupDTO){
+    public Response<LoginVO> signup(@RequestBody SignupDTO signupDTO){
         log.info("用戶註冊：{}", signupDTO);
-        userService.signup(signupDTO);
+        return userService.signup(signupDTO);
     }
 }

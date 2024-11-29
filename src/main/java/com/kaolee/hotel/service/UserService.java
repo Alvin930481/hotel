@@ -2,7 +2,6 @@ package com.kaolee.hotel.service;
 
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
-import com.kaolee.hotel.pojo.po.UserPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
 
@@ -16,7 +15,9 @@ public interface UserService {
 
     /**
      * 用戶註冊
+     *
      * @param signupDTO
+     * @return
      */
-    void signup(SignupDTO signupDTO);
+    Response<LoginVO> signup(SignupDTO signupDTO);
 }

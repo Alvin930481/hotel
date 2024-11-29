@@ -5,7 +5,6 @@ import com.kaolee.hotel.constant.MessageConstant;
 import com.kaolee.hotel.exception.EmailNotFoundException;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
-import com.kaolee.hotel.pojo.po.AddressPO;
 import com.kaolee.hotel.pojo.po.UserPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
@@ -60,21 +59,22 @@ public class UserServiceImpl implements UserService {
         LoginVO loginVO = new LoginVO();
         BeanUtils.copyProperties(user, loginVO);
 
-
-
-
         return Response.success(loginVO,token);
     }
 
     /**
      * 用戶註冊
+     *
      * @param signupDTO
+     * @return
      */
     @Override
-    public void signup(SignupDTO signupDTO) {
+    public Response<LoginVO> signup(SignupDTO signupDTO) {
         UserPO userPO = new UserPO();
+        LoginVO loginVO = new LoginVO();
         BeanUtils.copyProperties(signupDTO,userPO);
-
         userRepository.save(userPO);
+        BeanUtils.copyProperties(userPO,loginVO);
+        return Response.success(loginVO);
     }
 }
