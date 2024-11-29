@@ -8,6 +8,7 @@ import com.kaolee.hotel.pojo.dto.SignupDTO;
 import com.kaolee.hotel.pojo.po.UserPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
+import com.kaolee.hotel.pojo.vo.UserVO;
 import com.kaolee.hotel.properties.JwtProperties;
 import com.kaolee.hotel.repository.UserRepository;
 import com.kaolee.hotel.service.UserService;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -76,5 +78,18 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userPO);
         BeanUtils.copyProperties(userPO,loginVO);
         return Response.success(loginVO);
+    }
+
+    /**
+     * 查詢使用者
+     * @return
+     */
+    @Override
+    public UserVO getUser(String userId) {
+        Optional<UserPO> user = userRepository.findById(userId);
+        UserPO userPO = user.get();
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(userPO,userVO);
+        return userVO;
     }
 }

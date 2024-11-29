@@ -4,6 +4,7 @@ import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
+import com.kaolee.hotel.pojo.vo.UserVO;
 
 public interface UserService {
 
@@ -20,4 +21,10 @@ public interface UserService {
      * @return
      */
     Response<LoginVO> signup(SignupDTO signupDTO);
+
+    /**
+     * 查詢使用者
+     * @return
+     */
+    UserVO getUser(String userId);
 }

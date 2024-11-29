@@ -4,8 +4,10 @@ import com.kaolee.hotel.constant.JwtClaimsConstant;
 import com.kaolee.hotel.context.BaseContext;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
+import com.kaolee.hotel.pojo.po.UserPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
+import com.kaolee.hotel.pojo.vo.UserVO;
 import com.kaolee.hotel.properties.JwtProperties;
 import com.kaolee.hotel.service.UserService;
 import com.kaolee.hotel.utils.JwtUtil;
@@ -84,5 +86,19 @@ public class UserController {
             log.info("解析錯誤：{}",ex);
             return Response.failure("請重新登入");
         }
+    }
+
+
+    /**
+     * 取得使用者資訊
+     * @return
+     */
+    //TODO:不確定功能，先當作確認session
+    @Operation( tags = {"User-使用者"},summary = "取得使用者資訊")
+    @GetMapping
+    public Response<UserVO> getUser(){
+        String currentId = BaseContext.getCurrentId();
+        UserVO userVO = userService.getUser(currentId);
+        return Response.success(userVO);
     }
 }

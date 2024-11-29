@@ -14,23 +14,23 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Document(collection = "users")
-public class UserPO {
-    @Id
-    private String id;
-    private AddressPO address;
-    private String name;
-    @Indexed(unique = true)
-    private String email;
-    private String phone;
-    private LocalDate birthday;
-    private String password;
-    private String verificationToken;
-    @CreatedDate
-    private LocalDateTime createdAt;
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    @Document(collection = "users")
+    public class UserPO {
+        @Id
+        private String id;
+        private AddressPO address;
+        private String name;
+        @Indexed(unique = true)
+        private String email;
+        private String phone;
+        private LocalDate birthday;
+        private String password;
+        private String verificationToken;
+        @CreatedDate
+        private LocalDateTime createdAt;
+        @LastModifiedDate
+        private LocalDateTime updatedAt;
 }
