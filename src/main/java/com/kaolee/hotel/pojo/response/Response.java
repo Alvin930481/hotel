@@ -11,6 +11,12 @@ public class Response<T> {
     private String message;
     private T result;
 
+    public static Response success(String token){
+        Response response = new Response();
+        response.setStatus(true);
+        response.setToken(token);
+        return response;
+    }
 
     public static <T> Response<T> success(T result) {
         Response<T> response = new Response<>();

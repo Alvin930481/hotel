@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+//TODO:因為會攔截到swagger，之後再處理
 //@Configuration
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {

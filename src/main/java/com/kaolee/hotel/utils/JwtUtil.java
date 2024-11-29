@@ -35,12 +35,13 @@ public class JwtUtil {
         long expMillis = System.currentTimeMillis() + ttlMillis;
         Date exp = new Date(expMillis);
 
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         // 設置jwt的body
         JwtBuilder builder = Jwts.builder()
                 // 如果有私有聲明，一定要先設定這個自己創建的私有的聲明，這個是給builder的claim賦值，一旦寫在標準的聲明賦值之後，就是覆蓋了那些標準的聲明的
                 .setClaims(claims)
                 //設定簽名使用的簽名演算法和簽名使用的秘鑰
-                .signWith(signatureAlgorithm, secretKey.getBytes(StandardCharsets.UTF_8))
+                .signWith(key)
                 //設定過期時間
                 .setExpiration(exp);
 
