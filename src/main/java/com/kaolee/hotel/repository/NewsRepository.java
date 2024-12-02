@@ -6,4 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface NewsRepository extends MongoRepository<NewsPO,String> {
 
+
+    NewsPO findByTitle(String title);
 }

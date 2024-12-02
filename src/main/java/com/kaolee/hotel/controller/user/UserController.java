@@ -1,11 +1,10 @@
-package com.kaolee.hotel.controller;
+package com.kaolee.hotel.controller.user;
 
 import com.kaolee.hotel.constant.JwtClaimsConstant;
 import com.kaolee.hotel.context.BaseContext;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
 import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
-import com.kaolee.hotel.pojo.po.UserPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
 import com.kaolee.hotel.pojo.vo.UserVO;

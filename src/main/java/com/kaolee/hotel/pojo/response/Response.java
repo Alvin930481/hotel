@@ -18,6 +18,7 @@ public class Response<T> {
         return response;
     }
 
+
     public static <T> Response<T> success(T result) {
         Response<T> response = new Response<>();
         response.setStatus(true);
