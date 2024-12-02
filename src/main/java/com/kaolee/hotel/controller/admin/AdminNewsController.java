@@ -47,4 +47,12 @@ public class AdminNewsController {
         NewsPO newsPO = newsService.update(id,newsDTO);
         return Response.success(newsPO);
     }
+
+    @Operation( tags = {"Admin/News - 最新消息管理"},summary = "刪除最新消息")
+    @DeleteMapping("/{id}")
+    public Response<NewsPO> deleteNews(@RequestParam String id){
+        NewsPO newsPO = newsService.delete(id);
+        return Response.success(newsPO);
+    }
+
 }
