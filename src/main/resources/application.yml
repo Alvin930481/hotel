@@ -6,6 +6,8 @@ spring:
     mongodb:
       uri: mongodb+srv://alvin930490:ddFCQqJzgaOc3j87@cluster0.qwysd.mongodb.net/hotel_sys?retryWrites=true&w=majority&appName=Cluster0
 
+
+
 #swagger
 springdoc:
   api-docs:
@@ -22,6 +24,12 @@ kaolee:
     user-ttl: 7200000
     # 配置前端傳遞過來的令牌名稱
     user-token-name: token
+
+#spring日誌配置
+logging:
+  level:
+    # spring事務管理日誌
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
 
 
 

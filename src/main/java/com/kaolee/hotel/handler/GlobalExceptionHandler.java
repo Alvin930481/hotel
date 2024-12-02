@@ -47,6 +47,15 @@ public class GlobalExceptionHandler {
         return Response.failure(ex.getMessage());
     }
 
-
+    /**
+     * 捕獲所有異常
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler
+    public Response exceptionHandler(Exception ex){
+        log.error("未知異常訊息：{}", ex);
+        return Response.failure(MessageConstant.UNKNOWN_ERROR);
+    }
 
 }

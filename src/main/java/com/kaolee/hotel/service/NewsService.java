@@ -19,4 +19,11 @@ public interface NewsService {
      * @return
      */
     List<NewsPO> getAll();
+
+    /**
+     * 更新最新消息
+     * @param newsDTO
+     * @return
+     */
+    NewsPO update(String id,NewsDTO newsDTO);
 }

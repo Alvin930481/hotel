@@ -7,4 +7,5 @@ public class MessageConstant {
     public static final String UNKNOWN_ERROR = "未知錯誤";
     public static final String EMAIL_FORMAT_ERROR = "E-mail格式錯誤";
 
+
 }

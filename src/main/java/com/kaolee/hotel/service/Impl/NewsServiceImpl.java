@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -20,20 +21,24 @@ public class NewsServiceImpl implements NewsService {
 
     /**
      * 新增最新消息
+     *
      * @param newsDTO
      * @return
      */
+    //TODO：尚未處理重複機制
     @Override
     public NewsPO save(NewsDTO newsDTO) {
         NewsPO newsPO = new NewsPO();
-        BeanUtils.copyProperties(newsDTO,newsPO);
+        BeanUtils.copyProperties(newsDTO, newsPO);
         newsRepository.save(newsPO);
         newsPO = newsRepository.findByTitle(newsDTO.getTitle());
         return newsPO;
     }
 
+
     /**
      * 取得所有最新消息
+     *
      * @return
      */
     @Override
@@ -41,5 +46,14 @@ public class NewsServiceImpl implements NewsService {
         List<NewsPO> newsPOS = new ArrayList<>();
         newsPOS = newsRepository.findAll();
         return newsPOS;
+    }
+
+    @Override
+    public NewsPO update(String id, NewsDTO newsDTO) {
+        Optional<NewsPO> optionalNewsPO = newsRepository.findById(id);
+        NewsPO newsPO = optionalNewsPO.orElseThrow(() -> new RuntimeException("News not found with id: " + id));
+        BeanUtils.copyProperties(newsDTO, newsPO);
+        newsRepository.save(newsPO);
+        return newsRepository.findById(id).get();
     }
 }

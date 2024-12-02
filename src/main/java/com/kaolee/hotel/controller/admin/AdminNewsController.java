@@ -7,10 +7,7 @@ import com.kaolee.hotel.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,5 +39,12 @@ public class AdminNewsController {
     public Response<List<NewsPO>> getAllNews(){
         List<NewsPO> newsPOS = newsService.getAll();
         return Response.success(newsPOS);
+    }
+
+    @Operation( tags = {"Admin/News - 最新消息管理"},summary = "修改最新消息")
+    @PutMapping("/{id}")
+    public Response<NewsPO> updateNews(@RequestParam String id, @RequestBody NewsDTO newsDTO){
+        NewsPO newsPO = newsService.update(id,newsDTO);
+        return Response.success(newsPO);
     }
 }
