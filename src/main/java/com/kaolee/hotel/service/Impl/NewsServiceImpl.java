@@ -9,6 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 public class NewsServiceImpl implements NewsService {
@@ -27,5 +30,16 @@ public class NewsServiceImpl implements NewsService {
         newsRepository.save(newsPO);
         newsPO = newsRepository.findByTitle(newsDTO.getTitle());
         return newsPO;
+    }
+
+    /**
+     * 取得所有最新消息
+     * @return
+     */
+    @Override
+    public List<NewsPO> getAll() {
+        List<NewsPO> newsPOS = new ArrayList<>();
+        newsPOS = newsRepository.findAll();
+        return newsPOS;
     }
 }
