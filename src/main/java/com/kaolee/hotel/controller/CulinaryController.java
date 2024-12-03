@@ -7,10 +7,9 @@ import com.kaolee.hotel.service.CulinaryService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -30,5 +29,12 @@ public class CulinaryController {
     public Response<CulinaryPO> saveCulinary(@RequestBody CulinaryDTO culinaryDTO){
         CulinaryPO culinaryPO = culinaryService.save(culinaryDTO);
         return Response.success(culinaryPO);
+    }
+
+    @Operation(tags = {"Admin/Culinary - 美味佳餚管理"},summary = "查詢美味佳餚")
+    @GetMapping
+    public Response<List<CulinaryPO>> getAll(){
+        List<CulinaryPO> culinaryPOS = culinaryService.getAll();
+        return Response.success(culinaryPOS);
     }
 }

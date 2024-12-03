@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CulinaryServiceImpl implements CulinaryService {
@@ -30,5 +31,16 @@ public class CulinaryServiceImpl implements CulinaryService {
         culinaryRepository.save(culinaryPO);
         culinaryPO = culinaryRepository.findByTitle(culinaryPO.getTitle());
         return culinaryPO;
+    }
+
+
+    /**
+     * 查詢所有美味佳餚
+     * @return
+     */
+    @Override
+    public List<CulinaryPO> getAll() {
+        List<CulinaryPO> all = culinaryRepository.findAll();
+        return all;
     }
 }
