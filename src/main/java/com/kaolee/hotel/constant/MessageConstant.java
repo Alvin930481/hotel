@@ -8,6 +8,7 @@ public class MessageConstant {
     public static final String EMAIL_FORMAT_ERROR = "E-mail格式錯誤";
     public static final String NEWS_NOT_FOUND = "最新消息不存在";
     public static final String DINGING_TIME_EMPTY = "diningTime 未填寫";
+    public static final String CULINARY_NOT_FOUND = "美味佳餚不存在";
 
 
 }

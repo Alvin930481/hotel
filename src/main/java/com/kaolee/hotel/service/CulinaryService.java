@@ -19,4 +19,12 @@ public interface CulinaryService {
      * @return
      */
     List<CulinaryPO> getAll();
+
+    /**
+     * 更新美味佳餚
+     * @param id
+     * @param culinaryDTO
+     * @return
+     */
+    CulinaryPO update(String id, CulinaryDTO culinaryDTO);
 }

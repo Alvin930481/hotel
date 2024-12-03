@@ -37,4 +37,11 @@ public class CulinaryController {
         List<CulinaryPO> culinaryPOS = culinaryService.getAll();
         return Response.success(culinaryPOS);
     }
+
+    @Operation(tags = {"Admin/Culinary - 美味佳餚管理"},summary = "更新美味佳餚")
+    @PutMapping("/{id}")
+    public Response<CulinaryPO> updateCulinary(@RequestParam String id, @RequestBody CulinaryDTO culinaryDTO){
+        CulinaryPO culinaryPO = culinaryService.update(id,culinaryDTO);
+        return Response.success(culinaryPO);
+    }
 }
