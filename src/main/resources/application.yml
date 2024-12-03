@@ -6,8 +6,6 @@ spring:
     mongodb:
       uri: mongodb+srv://alvin930490:ddFCQqJzgaOc3j87@cluster0.qwysd.mongodb.net/hotel_sys?retryWrites=true&w=majority&appName=Cluster0
 
-
-
 #swagger
 springdoc:
   api-docs:
