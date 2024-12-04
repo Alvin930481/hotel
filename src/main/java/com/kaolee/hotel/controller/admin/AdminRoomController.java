@@ -1,4 +1,4 @@
-package com.kaolee.hotel.controller;
+package com.kaolee.hotel.controller.admin;
 
 import com.kaolee.hotel.pojo.dto.RoomsDTO;
 import com.kaolee.hotel.pojo.po.RoomsPO;
@@ -13,8 +13,8 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/rooms")
-public class RoomController {
+@RequestMapping("/api/v1/admin/rooms")
+public class AdminRoomController {
     @Autowired
     private RoomService roomService;
 

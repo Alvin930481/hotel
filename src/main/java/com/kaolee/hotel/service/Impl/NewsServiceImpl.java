@@ -84,5 +84,15 @@ public class NewsServiceImpl implements NewsService {
         return newsPO;
     }
 
-
+    /**
+     * 根據ＩＤ取得所有最新消息
+     * @param id
+     * @return
+     */
+    @Override
+    public NewsPO getById(String id) {
+        Optional<NewsPO> optionalNewsPO = newsRepository.findById(id);
+        return optionalNewsPO
+                .orElseThrow(()->new NewsNotFoundException(MessageConstant.NEWS_NOT_FOUND));
+    }
 }

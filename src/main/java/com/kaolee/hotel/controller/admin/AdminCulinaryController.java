@@ -1,4 +1,4 @@
-package com.kaolee.hotel.controller;
+package com.kaolee.hotel.controller.admin;
 
 import com.kaolee.hotel.pojo.dto.CulinaryDTO;
 import com.kaolee.hotel.pojo.po.CulinaryPO;
@@ -13,8 +13,8 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/culinary")
-public class CulinaryController {
+@RequestMapping("/api/v1/admin/culinary")
+public class AdminCulinaryController {
     @Autowired
     private CulinaryService culinaryService;
 

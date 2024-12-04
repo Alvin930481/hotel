@@ -1,4 +1,4 @@
-package com.kaolee.hotel.controller;
+package com.kaolee.hotel.controller.admin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/orders")
-public class OrderController {
+@RequestMapping("/api/v1/admin/orders")
+public class AdminOrderController {
 }
