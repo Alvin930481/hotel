@@ -31,6 +31,10 @@ public class CulinaryController {
         return Response.success(culinaryPO);
     }
 
+    /**
+     * 查詢美味佳餚
+     * @return
+     */
     @Operation(tags = {"Admin/Culinary - 美味佳餚管理"},summary = "查詢美味佳餚")
     @GetMapping
     public Response<List<CulinaryPO>> getAll(){
@@ -38,10 +42,24 @@ public class CulinaryController {
         return Response.success(culinaryPOS);
     }
 
+    /**
+     * 更新美味佳餚
+     * @param id
+     * @param culinaryDTO
+     * @return
+     */
     @Operation(tags = {"Admin/Culinary - 美味佳餚管理"},summary = "更新美味佳餚")
     @PutMapping("/{id}")
-    public Response<CulinaryPO> updateCulinary(@RequestParam String id, @RequestBody CulinaryDTO culinaryDTO){
+    public Response<CulinaryPO> updateCulinary(@PathVariable String id, @RequestBody CulinaryDTO culinaryDTO){
         CulinaryPO culinaryPO = culinaryService.update(id,culinaryDTO);
         return Response.success(culinaryPO);
     }
+
+    @Operation(tags = {"Admin/Culinary - 美味佳餚管理"},summary = "刪除美味佳餚")
+    @DeleteMapping("/{id}")
+    public Response<CulinaryPO> deleteCulinary(@PathVariable String id){
+        CulinaryPO culinaryPO = culinaryService.delete(id);
+        return Response.success(culinaryPO);
+    }
+
 }

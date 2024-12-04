@@ -9,6 +9,8 @@ public class MessageConstant {
     public static final String NEWS_NOT_FOUND = "最新消息不存在";
     public static final String DINGING_TIME_EMPTY = "diningTime 未填寫";
     public static final String CULINARY_NOT_FOUND = "美味佳餚不存在";
+    public static final String ROOM_PRICE_EMPTY = "房型價格為空";
+    public static final String ROOM_NOT_FOUND = "房型不存在";
 
 
 }

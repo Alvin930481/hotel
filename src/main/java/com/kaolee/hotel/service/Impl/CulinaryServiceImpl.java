@@ -38,7 +38,6 @@ public class CulinaryServiceImpl implements CulinaryService {
 
     /**
      * 查詢所有美味佳餚
-     *
      * @return
      */
     @Override
@@ -49,7 +48,6 @@ public class CulinaryServiceImpl implements CulinaryService {
 
     /**
      * 更新美味佳餚
-     *
      * @param id
      * @param culinaryDTO
      * @return
@@ -68,6 +66,19 @@ public class CulinaryServiceImpl implements CulinaryService {
         BeanUtils.copyProperties(culinaryDTO, culinaryPO);
         culinaryRepository.save(culinaryPO);
         culinaryPO = culinaryRepository.findById(id).get();
+        return culinaryPO;
+    }
+
+    /**
+     * 刪除美味佳餚
+     * @param id
+     * @return
+     */
+    @Override
+    public CulinaryPO delete(String id) {
+        Optional<CulinaryPO> optionalCulinaryPO = culinaryRepository.findById(id);
+        CulinaryPO culinaryPO = optionalCulinaryPO.orElseThrow(() -> new CulinaryNotFoundException(MessageConstant.CULINARY_NOT_FOUND));
+        culinaryRepository.deleteById(id);
         return culinaryPO;
     }
 }

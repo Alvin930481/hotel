@@ -27,4 +27,11 @@ public interface CulinaryService {
      * @return
      */
     CulinaryPO update(String id, CulinaryDTO culinaryDTO);
+
+    /**
+     * 刪除美味佳餚
+     * @param id
+     * @return
+     */
+    CulinaryPO delete(String id);
 }

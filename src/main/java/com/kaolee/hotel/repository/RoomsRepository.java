@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomsRepository extends MongoRepository<RoomsPO,String> {
 
+    RoomsPO findByName(String name);
 }
