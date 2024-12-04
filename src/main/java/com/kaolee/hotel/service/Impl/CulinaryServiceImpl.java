@@ -81,4 +81,12 @@ public class CulinaryServiceImpl implements CulinaryService {
         culinaryRepository.deleteById(id);
         return culinaryPO;
     }
+
+    @Override
+    public CulinaryPO getById(String id) {
+        Optional<CulinaryPO> optionalCulinaryPO = culinaryRepository.findById(id);
+
+        return optionalCulinaryPO
+                .orElseThrow(()->new CulinaryNotFoundException(MessageConstant.CULINARY_NOT_FOUND));
+    }
 }

@@ -34,4 +34,11 @@ public interface CulinaryService {
      * @return
      */
     CulinaryPO delete(String id);
+
+    /**
+     * 根據ＩＤ查詢美味佳餚
+     * @param id
+     * @return
+     */
+    CulinaryPO getById(String id);
 }

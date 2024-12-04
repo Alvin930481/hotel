@@ -82,4 +82,16 @@ public class RoomServiceImpl implements RoomService {
         repository.deleteById(id);
         return roomsPO;
     }
+
+    /**
+     * 根據ＩＤ查詢房型
+     * @param id
+     * @return
+     */
+    @Override
+    public RoomsPO getById(String id) {
+        Optional<RoomsPO> optionalRoomsPO = repository.findById(id);
+        return optionalRoomsPO
+                .orElseThrow(()->new RoomNotFoundException(MessageConstant.ROOM_NOT_FOUND));
+    }
 }

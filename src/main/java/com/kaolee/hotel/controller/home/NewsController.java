@@ -1,4 +1,4 @@
-package com.kaolee.hotel.controller;
+package com.kaolee.hotel.controller.home;
 
 import com.kaolee.hotel.pojo.po.NewsPO;
 import com.kaolee.hotel.pojo.response.Response;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/news")
+@RequestMapping("/api/v1/home/news")
 public class NewsController {
     @Autowired
     private NewsService newsService;

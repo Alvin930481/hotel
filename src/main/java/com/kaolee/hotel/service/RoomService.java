@@ -14,4 +14,6 @@ public interface RoomService {
     RoomsPO update(String id,RoomsDTO roomsDTO);
 
     RoomsPO delete(String id);
+
+    RoomsPO getById(String id);
 }
