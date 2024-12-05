@@ -26,4 +26,18 @@ public interface NewsService {
      * @return
      */
     NewsPO update(String id,NewsDTO newsDTO);
+
+    /**
+     * 刪除最新消息
+     * @param id
+     * @return
+     */
+    NewsPO delete(String id);
+
+    /**
+     * 根據ＩＤ取得最新消息
+     * @param id
+     * @return
+     */
+    NewsPO getById(String id);
 }
