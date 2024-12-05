@@ -27,4 +27,19 @@ public interface OrderService {
      * @return
      */
     OrderVO getById(String id);
+
+    /**
+     * delete by id
+     * @param id
+     * @return
+     */
+    OrderVO deleteById(String id);
+
+    /**
+     * update order by id
+     * @param id
+     * @param orderDTO
+     * @return
+     */
+    OrderVO update(String id, OrderDTO orderDTO);
 }

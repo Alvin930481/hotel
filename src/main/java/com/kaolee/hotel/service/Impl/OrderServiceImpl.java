@@ -16,6 +16,7 @@ import com.kaolee.hotel.utils.DateTimeFormatCheck;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -96,6 +97,42 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(ordersPO,orderVO);
         String roomId = ordersPO.getRoomId();
         RoomsPO roomsPO = roomsRepository.findById(roomId).get();
+        orderVO.setRoomId(roomsPO);
+        return orderVO;
+    }
+
+    /**
+     * delete by id
+     * @param id
+     * @return
+     */
+    @Override
+    public OrderVO deleteById(String id) {
+        Optional<OrdersPO> optionalOrdersPO = ordersRepository.findById(id);
+        OrdersPO ordersPO = optionalOrdersPO.orElseThrow(() -> new OrderNotFoundException(MessageConstant.ORDER_NOT_FOUND));
+        ordersRepository.deleteById(ordersPO.getId());
+        OrderVO orderVO = new OrderVO();
+        BeanUtils.copyProperties(ordersPO,orderVO);
+        return orderVO;
+    }
+
+    /**
+     * update order by id
+     * @param id
+     * @param orderDTO
+     * @return
+     */
+    @Override
+    public OrderVO update(String id, OrderDTO orderDTO) {
+        Optional<OrdersPO> optionalOrdersPO = ordersRepository.findById(id);
+        OrdersPO ordersPO = optionalOrdersPO
+                .orElseThrow(() -> new OrderNotFoundException(MessageConstant.ORDER_NOT_FOUND));
+        BeanUtils.copyProperties(orderDTO,ordersPO);
+        ordersRepository.save(ordersPO);
+        String roomId = ordersPO.getRoomId();
+        RoomsPO roomsPO = roomsRepository.findById(roomId).get();
+        OrderVO orderVO = new OrderVO();
+        BeanUtils.copyProperties(ordersPO,orderVO);
         orderVO.setRoomId(roomsPO);
         return orderVO;
     }

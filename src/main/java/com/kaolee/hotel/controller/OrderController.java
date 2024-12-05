@@ -33,6 +33,10 @@ public class OrderController {
         return Response.success(orderVO);
     }
 
+    /**
+     * 取得所有訂單
+     * @return
+     */
     @Operation(tags = {"Orders - 訂單"}, summary = "取得所有訂單")
     @GetMapping
     public Response<List<OrderVO>> getAllOrders(){
@@ -40,10 +44,29 @@ public class OrderController {
         return Response.success(orderVOS);
     }
 
+    /**
+     * 依據ＩＤ取得訂單
+     * @param id
+     * @return
+     */
     @Operation(tags = {"Orders - 訂單"}, summary = "依據ＩＤ取得訂單")
     @GetMapping("/{id}")
     public Response<OrderVO> getOrdersById(@PathVariable String id){
         OrderVO orderVO = orderService.getById(id);
         return Response.success(orderVO);
     }
+
+    /**
+     * 依據ＩＤ刪除訂單
+     * @param id
+     * @return
+     */
+    @Operation(tags = {"Orders - 訂單"}, summary = "依據ＩＤ刪除訂單")
+    @DeleteMapping("/{id}")
+    public Response<OrderVO> deleteById(@PathVariable String id){
+        OrderVO orderVO = orderService.deleteById(id);
+        return Response.success(orderVO);
+    }
+
+
 }
