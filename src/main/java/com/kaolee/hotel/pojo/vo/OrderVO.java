@@ -1,6 +1,7 @@
-package com.kaolee.hotel.pojo.po;
+package com.kaolee.hotel.pojo.vo;
 
 import com.kaolee.hotel.pojo.dto.UserInfoDTO;
+import com.kaolee.hotel.pojo.po.RoomsPO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,19 +18,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "orders")
-public class OrdersPO {
-    @Id
+public class OrderVO {
+
     private String id;
-    private String roomId;
+    private RoomsPO roomId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private Integer peopleNum;
     private String OderUserId;
     private Integer status;
     private UserInfoDTO userInfo;
-    @CreatedDate
     private LocalDateTime createdAt;
-    @LastModifiedDate
     private LocalDateTime updatedAt;
 }

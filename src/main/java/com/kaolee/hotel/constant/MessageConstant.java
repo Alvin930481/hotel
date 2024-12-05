@@ -11,6 +11,7 @@ public class MessageConstant {
     public static final String CULINARY_NOT_FOUND = "美味佳餚不存在";
     public static final String ROOM_PRICE_EMPTY = "房型價格為空";
     public static final String ROOM_NOT_FOUND = "房型不存在";
+    public static final String DATE_OR_TIME_FORMAT_EXCEPTION = "日期時間格式錯誤";
 
 
 }
