@@ -4,6 +4,8 @@ import com.kaolee.hotel.pojo.dto.OrderDTO;
 import com.kaolee.hotel.pojo.po.OrdersPO;
 import com.kaolee.hotel.pojo.vo.OrderVO;
 
+import java.util.List;
+
 public interface OrderService {
 
     /**
@@ -12,4 +14,17 @@ public interface OrderService {
      * @return
      */
     OrderVO save(OrderDTO orderDTO);
+
+    /**
+     * 查詢所有訂單
+     * @return
+     */
+    List<OrderVO> getAll();
+
+    /**
+     * get by ID
+     * @param id
+     * @return
+     */
+    OrderVO getById(String id);
 }

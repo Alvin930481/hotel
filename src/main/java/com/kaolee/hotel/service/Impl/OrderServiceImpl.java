@@ -3,6 +3,7 @@ package com.kaolee.hotel.service.Impl;
 import com.kaolee.hotel.constant.DateTimeFormatConstant;
 import com.kaolee.hotel.constant.MessageConstant;
 import com.kaolee.hotel.exception.DateTimeFormatException;
+import com.kaolee.hotel.exception.OrderNotFoundException;
 import com.kaolee.hotel.exception.RoomNotFoundException;
 import com.kaolee.hotel.pojo.dto.OrderDTO;
 import com.kaolee.hotel.pojo.po.OrdersPO;
@@ -18,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -58,6 +61,42 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(ordersPO,orderVO);
         orderVO.setRoomId(roomsPO);
 
+        return orderVO;
+    }
+
+    /**
+     * 查詢所有訂單
+     * @return
+     */
+    @Override
+    public List<OrderVO> getAll() {
+        List<OrdersPO> all = ordersRepository.findAll();
+        ArrayList<OrderVO> orderVOS = new ArrayList<>();
+        OrderVO orderVO = new OrderVO();
+        all.forEach(ordersPO -> {
+            String roomId = ordersPO.getRoomId();
+            RoomsPO RoomsPO = roomsRepository.findById(roomId).get();
+            BeanUtils.copyProperties(ordersPO, orderVO);
+            orderVO.setRoomId(RoomsPO);
+            orderVOS.add(orderVO);
+        });
+        return orderVOS;
+    }
+
+    /**
+     * get by id
+     * @param id
+     * @return
+     */
+    @Override
+    public OrderVO getById(String id) {
+        Optional<OrdersPO> optionalOrdersPO = ordersRepository.findById(id);
+        OrdersPO ordersPO = optionalOrdersPO.orElseThrow(() -> new OrderNotFoundException(MessageConstant.ORDER_NOT_FOUND));
+        OrderVO orderVO = new OrderVO();
+        BeanUtils.copyProperties(ordersPO,orderVO);
+        String roomId = ordersPO.getRoomId();
+        RoomsPO roomsPO = roomsRepository.findById(roomId).get();
+        orderVO.setRoomId(roomsPO);
         return orderVO;
     }
 
