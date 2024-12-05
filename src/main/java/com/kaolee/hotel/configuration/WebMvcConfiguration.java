@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 //@Configuration
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
-    @Autowired
+//    @Autowired
     private JwtTokenInterceptor jwtTokenInterceptor;
     /**
      * 註冊自定義攔截器

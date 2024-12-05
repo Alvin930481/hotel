@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,17 +22,8 @@ public class VerifyServiceImpl implements VerfyService {
 
     @Override
     public boolean verifyEmail(String email) {
-        //驗證email格式
-        boolean validEmail = isValidEmail(email);
-        if (!validEmail){
-            throw new EmailFormatException(MessageConstant.EMAIL_FORMAT_ERROR);
-        }
-        //用email查詢用戶資料
-        UserPO user = userRepository.findByEmail(email);
-        if (user==null){
-            return false;
-        }
-        return true;
+        validateEmail(email);
+        return userRepository.findByEmail(email).isPresent();
     }
 
     /**
@@ -39,10 +31,11 @@ public class VerifyServiceImpl implements VerfyService {
      * @param email
      * @return
      */
-    public static boolean isValidEmail(String email) {
-        String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+    public static void validateEmail(String email) {
+        final String EMAIL_REGEX = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+        boolean isValid = Pattern.compile(EMAIL_REGEX).matcher(email).matches();
+        if (!isValid) {
+            throw new EmailFormatException(MessageConstant.EMAIL_FORMAT_ERROR);
+        }
     }
 }
