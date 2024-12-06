@@ -18,7 +18,7 @@ springdoc:
 kaolee:
   jwt:
     # 設置jwt簽章加密時使用的密鑰
-    user-secret-key: a-very-long-and-secure-secret-key-kaolee
+    user-secret-key: YS12ZXJ5LWxvbmctYW5kLXNlY3VyZS1zZWNyZXQta2V5LWthb2xlZQ==
     # 配置jwt過期时间
     user-ttl: 7200000
     # 配置前端傳遞過來的令牌名稱
