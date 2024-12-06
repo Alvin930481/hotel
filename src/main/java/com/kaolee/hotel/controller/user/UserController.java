@@ -10,13 +10,14 @@ import com.kaolee.hotel.pojo.vo.LoginVO;
 import com.kaolee.hotel.pojo.vo.UserVO;
 import com.kaolee.hotel.properties.JwtProperties;
 import com.kaolee.hotel.service.UserService;
-import com.kaolee.hotel.utils.JwtUtil;
+import com.kaolee.hotel.utils.JwtService;
 import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -26,14 +27,14 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private JwtProperties jwtProperties;
+    private JwtService jwtService;
 
     /**
      * 使用者登入
      * @param loginInfo
      * @return
      */
-    @Operation( tags = {"User-使用者"},summary = "使用者登入")
+    @Operation( tags = {"User-使用者"},summary = "使用者登入", security = {})
     @PostMapping("/login")
     public Response<LoginVO> login(@RequestBody LoginInfo loginInfo){
         log.info("用戶登入操作:{}",loginInfo);
@@ -53,7 +54,7 @@ public class UserController {
      * @param signupDTO
      * @return
      */
-    @Operation( tags = {"User-使用者"},summary = "使用者註冊")
+    @Operation( tags = {"User-使用者"},summary = "使用者註冊", security = {})
     @PostMapping("/signup")
     public Response<LoginVO> signup(@RequestBody SignupDTO signupDTO){
         log.info("用戶註冊：{}", signupDTO);
@@ -66,16 +67,18 @@ public class UserController {
      * @param response
      * @return
      */
+    @ResponseStatus(HttpStatus.OK)
     @Operation( tags = {"User-使用者"},summary = "檢查使用者登入")
     @GetMapping("/check")
     public Response check(HttpServletRequest request, HttpServletResponse response){
         //1、從請求頭中獲取令牌
-        String token = request.getHeader(jwtProperties.getUserTokenName());
+        String token = request.getHeader(jwtService.getUserTokenName());
 
         //2、校驗令牌
         try {
             log.info("jwt校驗:{}", token);
-            Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
+
+            Claims claims = jwtService.extractAllClaims(token);
             String userId = claims.get(JwtClaimsConstant.USER_ID).toString();
             log.info("目前用戶id：{}", userId);
             //3、驗證成功，回傳token
@@ -94,6 +97,7 @@ public class UserController {
      * @return
      */
     //TODO:不確定功能，先當作確認session
+    @ResponseStatus(HttpStatus.OK)
     @Operation( tags = {"User-使用者"},summary = "取得使用者資訊")
     @GetMapping
     public Response<UserVO> getUser(){
@@ -107,6 +111,7 @@ public class UserController {
      * 更新使用者資訊
      * @param userUpdateDTO
      */
+    @ResponseStatus(HttpStatus.OK)
     @Operation( tags = {"User-使用者"},summary = "更新使用者資訊")
     @PutMapping
     public void userUpdate(@RequestBody UserUpdateDTO userUpdateDTO){
