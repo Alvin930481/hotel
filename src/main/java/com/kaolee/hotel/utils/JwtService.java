@@ -6,8 +6,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
@@ -15,13 +17,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Component
+@Service
+@Data
 public class JwtService {
     @Value("${kaolee.jwt.user-secret-key}")
     private String SECRET_KEY;
 
     @Value("${kaolee.jwt.user-ttl}")
     private long jwtExpiration;
+
+    @Value("${kaolee.jwt.user-token-name}")
+    private String userTokenName;
+
 
 
     public String generateToken(UserPO user) {
@@ -30,6 +37,7 @@ public class JwtService {
     }
 
     public String generateRefreshToken(UserPO user) {
+
         return createToken(new HashMap<>(), user.getName());
     }
 
@@ -55,7 +63,7 @@ public class JwtService {
         return claimssolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()

@@ -46,12 +46,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Response<LoginVO> login(LoginInfo request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
         //依照email查詢用戶
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new EmailNotFoundException(MessageConstant.USER_NOT_FOUND));

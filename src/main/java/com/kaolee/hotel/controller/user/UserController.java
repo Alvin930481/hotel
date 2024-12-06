@@ -10,7 +10,7 @@ import com.kaolee.hotel.pojo.vo.LoginVO;
 import com.kaolee.hotel.pojo.vo.UserVO;
 import com.kaolee.hotel.properties.JwtProperties;
 import com.kaolee.hotel.service.UserService;
-import com.kaolee.hotel.utils.JwtUtil;
+import com.kaolee.hotel.utils.JwtService;
 import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private JwtProperties jwtProperties;
+    private JwtService jwtService;
 
     /**
      * 使用者登入
@@ -72,12 +72,13 @@ public class UserController {
     @GetMapping("/check")
     public Response check(HttpServletRequest request, HttpServletResponse response){
         //1、從請求頭中獲取令牌
-        String token = request.getHeader(jwtProperties.getUserTokenName());
+        String token = request.getHeader(jwtService.getUserTokenName());
 
         //2、校驗令牌
         try {
             log.info("jwt校驗:{}", token);
-            Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
+
+            Claims claims = jwtService.extractAllClaims(token);
             String userId = claims.get(JwtClaimsConstant.USER_ID).toString();
             log.info("目前用戶id：{}", userId);
             //3、驗證成功，回傳token
