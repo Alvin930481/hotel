@@ -13,15 +13,11 @@ import com.kaolee.hotel.pojo.vo.LoginVO;
 import com.kaolee.hotel.pojo.vo.UserVO;
 import com.kaolee.hotel.repository.UserRepository;
 import com.kaolee.hotel.service.UserService;
-import com.kaolee.hotel.utils.token.Token;
-import com.kaolee.hotel.utils.token.TokenRepository;
-import com.kaolee.hotel.utils.token.TokenType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,8 +28,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private TokenRepository tokenRepository;
     @Autowired
     private JwtService jwtService;
 
@@ -51,7 +45,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new EmailNotFoundException(MessageConstant.USER_NOT_FOUND));
         validatePassword(request, user);
         var jwtToken = jwtService.generateToken(user);
-        revokeAllUserTokens(user);
 
         //如果密碼正確，產生jwt並返回
         log.info("使用者登錄密碼正確，產生JWT...");
@@ -87,34 +80,12 @@ public class UserServiceImpl implements UserService {
         UserPO userPO = new UserPO();
         LoginVO loginVO = new LoginVO();
         BeanUtils.copyProperties(signupDTO,userPO);
-        UserPO savedUser = userRepository.save(userPO);
-        String jwtToken = jwtService.generateToken(userPO);
-        saveUserToken(savedUser, jwtToken);
+        userRepository.save(userPO);
         BeanUtils.copyProperties(userPO,loginVO);
         return Response.success(loginVO);
     }
 
-    private void saveUserToken(UserPO user, String jwtToken) {
-        var token = Token.builder()
-                .userId(user.getId())
-                .token(jwtToken)
-                .tokenType(TokenType.BEARER)
-                .expired(false)
-                .revoked(false)
-                .build();
-        tokenRepository.save(token);
-    }
 
-    private void revokeAllUserTokens(UserPO user) {
-        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
-        if (validUserTokens.isEmpty())
-            return;
-        validUserTokens.forEach(token -> {
-            token.setExpired(true);
-            token.setRevoked(true);
-        });
-        tokenRepository.saveAll(validUserTokens);
-    }
 
     /**
      * 查詢使用者

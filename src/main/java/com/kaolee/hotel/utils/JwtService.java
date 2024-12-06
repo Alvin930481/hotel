@@ -8,7 +8,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -29,26 +28,17 @@ public class JwtService {
     @Value("${kaolee.jwt.user-token-name}")
     private String userTokenName;
 
-
-
     public String generateToken(UserPO user) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, user.getName());
-    }
-
-    public String generateRefreshToken(UserPO user) {
-
         return createToken(new HashMap<>(), user.getName());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpiration);
-        return Jwts.builder()
+        return Jwts
+                .builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(expiryDate)
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
