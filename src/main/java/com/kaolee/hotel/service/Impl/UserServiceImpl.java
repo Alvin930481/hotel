@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
         String encodePassword =
                 passwordEncoder.encode(userPO.getPassword());
         userPO.setPassword(encodePassword);
-        UserPO savedUser = userRepository.save(userPO);
+        userRepository.save(userPO);
         BeanUtils.copyProperties(userPO,loginVO);
         return Response.success(loginVO);
     }

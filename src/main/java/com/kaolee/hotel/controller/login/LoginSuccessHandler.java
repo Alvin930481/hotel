@@ -61,7 +61,7 @@ public class LoginSuccessHandler extends
     PrintWriter writer = response.getWriter();
     // 構建成功回應對象
     Response responseObj = Response.success(token);
-    // 使用 Jackson 將 Java 對象轉換為 JSON 字串
+    // 使用 Jackson 將 Java 物件轉換為 JSON 字串
     String jsonResponse = objectMapper.writeValueAsString(responseObj);
     writer.print(jsonResponse);
     log.info("登錄成功");

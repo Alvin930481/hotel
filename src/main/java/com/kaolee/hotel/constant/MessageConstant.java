@@ -13,6 +13,7 @@ public class MessageConstant {
     public static final String ROOM_NOT_FOUND = "房型不存在";
     public static final String ORDER_NOT_FOUND = "訂單不存在";
     public static final String DATE_OR_TIME_FORMAT_EXCEPTION = "日期時間格式錯誤";
+    public static final String JWT_EXPIRED = "JWT TOKEN逾期";
 
 
 }

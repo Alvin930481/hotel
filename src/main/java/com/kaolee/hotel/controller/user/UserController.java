@@ -31,7 +31,7 @@ public class UserController {
 
 
     /**
-     * 使用者登入
+     * 使用者登入，其實可以不需要，因為在過濾器已經做掉，可是為了讓swagger生成自動測試，所以一樣加入。
      *
      * @param loginInfo
      * @return
@@ -39,15 +39,6 @@ public class UserController {
     @Operation(tags = {"User-使用者"}, summary = "使用者登入", security = {})
     @PostMapping("/login")
     public Response<LoginVO> login(@RequestBody LoginInfo loginInfo) {
-       /* log.info("用戶登入操作:{}", loginInfo);
-        try {
-            //登入成功，返回使用者
-            return userService.login(loginInfo);
-        } catch (Exception e) {
-            //捕捉到異常，返回異常訊息
-            log.info("登入異常,{}", e);
-            return Response.failure(e.getMessage());
-        }*/
         return null;
     }
 
@@ -72,7 +63,6 @@ public class UserController {
      * @param response
      * @return
      */
-    @ResponseStatus(HttpStatus.OK)
     @Operation(tags = {"User-使用者"}, summary = "檢查使用者登入")
     @GetMapping("/check")
     public Response check(HttpServletRequest request, HttpServletResponse response) {
@@ -124,4 +114,6 @@ public class UserController {
     public void userUpdate(@RequestBody UserUpdateDTO userUpdateDTO) {
         userService.update(userUpdateDTO);
     }
+
+
 }
