@@ -8,9 +8,8 @@ import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.pojo.vo.LoginVO;
 import com.kaolee.hotel.pojo.vo.UserVO;
-import com.kaolee.hotel.properties.JwtProperties;
 import com.kaolee.hotel.service.UserService;
-import com.kaolee.hotel.utils.JwtService;
+import com.kaolee.hotel.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -27,50 +27,55 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private JwtService jwtService;
+    private JwtUtil jwtService;
+
 
     /**
      * 使用者登入
+     *
      * @param loginInfo
      * @return
      */
-    @Operation( tags = {"User-使用者"},summary = "使用者登入", security = {})
+    @Operation(tags = {"User-使用者"}, summary = "使用者登入", security = {})
     @PostMapping("/login")
-    public Response<LoginVO> login(@RequestBody LoginInfo loginInfo){
-        log.info("用戶登入操作:{}",loginInfo);
-
+    public Response<LoginVO> login(@RequestBody LoginInfo loginInfo) {
+       /* log.info("用戶登入操作:{}", loginInfo);
         try {
             //登入成功，返回使用者
             return userService.login(loginInfo);
         } catch (Exception e) {
             //捕捉到異常，返回異常訊息
-            log.info("登入異常,{}",e);
+            log.info("登入異常,{}", e);
             return Response.failure(e.getMessage());
-        }
+        }*/
+        return null;
     }
+
 
     /**
      * 使用者註冊
+     *
      * @param signupDTO
      * @return
      */
-    @Operation( tags = {"User-使用者"},summary = "使用者註冊", security = {})
+    @Operation(tags = {"User-使用者"}, summary = "使用者註冊", security = {})
     @PostMapping("/signup")
-    public Response<LoginVO> signup(@RequestBody SignupDTO signupDTO){
+    public Response<LoginVO> signup(@RequestBody SignupDTO signupDTO) {
         log.info("用戶註冊：{}", signupDTO);
         return userService.signup(signupDTO);
     }
 
     /**
      * 檢查使用者登入
+     *
      * @param request
      * @param response
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
-    @Operation( tags = {"User-使用者"},summary = "檢查使用者登入")
+    @Operation(tags = {"User-使用者"}, summary = "檢查使用者登入")
     @GetMapping("/check")
-    public Response check(HttpServletRequest request, HttpServletResponse response){
+    public Response check(HttpServletRequest request, HttpServletResponse response) {
         //1、從請求頭中獲取令牌
         String token = request.getHeader(jwtService.getUserTokenName());
 
@@ -86,7 +91,7 @@ public class UserController {
         } catch (Exception ex) {
             //4、不通過，響應401狀態
             response.setStatus(401);
-            log.info("解析錯誤：{}",ex);
+            log.info("解析錯誤：{}", ex);
             return Response.failure("請重新登入");
         }
     }
@@ -94,13 +99,14 @@ public class UserController {
 
     /**
      * 取得使用者資訊
+     *
      * @return
      */
     //TODO:不確定功能，先當作確認session
     @ResponseStatus(HttpStatus.OK)
-    @Operation( tags = {"User-使用者"},summary = "取得使用者資訊")
+    @Operation(tags = {"User-使用者"}, summary = "取得使用者資訊")
     @GetMapping
-    public Response<UserVO> getUser(){
+    public Response<UserVO> getUser() {
         String currentId = BaseContext.getCurrentId();
         UserVO userVO = userService.getUser(currentId);
         return Response.success(userVO);
@@ -109,12 +115,13 @@ public class UserController {
 
     /**
      * 更新使用者資訊
+     *
      * @param userUpdateDTO
      */
     @ResponseStatus(HttpStatus.OK)
-    @Operation( tags = {"User-使用者"},summary = "更新使用者資訊")
+    @Operation(tags = {"User-使用者"}, summary = "更新使用者資訊")
     @PutMapping
-    public void userUpdate(@RequestBody UserUpdateDTO userUpdateDTO){
+    public void userUpdate(@RequestBody UserUpdateDTO userUpdateDTO) {
         userService.update(userUpdateDTO);
     }
 }

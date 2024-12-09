@@ -1,6 +1,5 @@
 package com.kaolee.hotel.pojo.dto;
 
-import com.kaolee.hotel.pojo.po.AddressPO;
 import lombok.Data;
 
 import java.time.LocalDate;

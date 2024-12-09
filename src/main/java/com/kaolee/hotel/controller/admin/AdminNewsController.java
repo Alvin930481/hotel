@@ -1,7 +1,7 @@
 package com.kaolee.hotel.controller.admin;
 
 import com.kaolee.hotel.pojo.dto.NewsDTO;
-import com.kaolee.hotel.pojo.po.NewsPO;
+import com.kaolee.hotel.pojo.entity.NewsPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;

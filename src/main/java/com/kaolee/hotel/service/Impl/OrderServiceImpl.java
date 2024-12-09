@@ -6,17 +6,16 @@ import com.kaolee.hotel.exception.DateTimeFormatException;
 import com.kaolee.hotel.exception.OrderNotFoundException;
 import com.kaolee.hotel.exception.RoomNotFoundException;
 import com.kaolee.hotel.pojo.dto.OrderDTO;
-import com.kaolee.hotel.pojo.po.OrdersPO;
-import com.kaolee.hotel.pojo.po.RoomsPO;
+import com.kaolee.hotel.pojo.entity.OrdersPO;
+import com.kaolee.hotel.pojo.entity.RoomsPO;
 import com.kaolee.hotel.pojo.vo.OrderVO;
 import com.kaolee.hotel.repository.OrdersRepository;
 import com.kaolee.hotel.repository.RoomsRepository;
 import com.kaolee.hotel.service.OrderService;
-import com.kaolee.hotel.utils.DateTimeFormatCheck;
+import com.kaolee.hotel.utils.DateTimeFormatCheckUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -42,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderVO save(OrderDTO orderDTO) {
         //確認check in date格式
-        boolean validDate = DateTimeFormatCheck
+        boolean validDate = DateTimeFormatCheckUtil
                 .isValidDate(String.valueOf(orderDTO.getCheckInDate()), DateTimeFormatConstant.CHECK_IN_DATE_FORMAT);
         if (!validDate) {
             throw new DateTimeFormatException(MessageConstant.DATE_OR_TIME_FORMAT_EXCEPTION);

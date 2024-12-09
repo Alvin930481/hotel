@@ -1,7 +1,7 @@
 package com.kaolee.hotel.service;
 
 import com.kaolee.hotel.pojo.dto.CulinaryDTO;
-import com.kaolee.hotel.pojo.po.CulinaryPO;
+import com.kaolee.hotel.pojo.entity.CulinaryPO;
 
 import java.util.List;
 

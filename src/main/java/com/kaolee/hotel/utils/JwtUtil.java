@@ -1,6 +1,7 @@
 package com.kaolee.hotel.utils;
 
-import com.kaolee.hotel.pojo.po.UserPO;
+import com.kaolee.hotel.controller.login.UserLoginInfo;
+import com.kaolee.hotel.pojo.entity.UserPO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -8,17 +9,16 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Service
+@Component
 @Data
-public class JwtService {
+public class JwtUtil {
     @Value("${kaolee.jwt.user-secret-key}")
     private String SECRET_KEY;
 
@@ -28,8 +28,8 @@ public class JwtService {
     @Value("${kaolee.jwt.user-token-name}")
     private String userTokenName;
 
-    public String generateToken(UserPO user) {
-        return createToken(new HashMap<>(), user.getName());
+    public String generateToken(Map<String,Object> claims, String username) {
+        return createToken(claims, username);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {

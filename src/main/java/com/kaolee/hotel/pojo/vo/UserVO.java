@@ -1,6 +1,6 @@
 package com.kaolee.hotel.pojo.vo;
 
-import com.kaolee.hotel.pojo.po.AddressPO;
+import com.kaolee.hotel.pojo.entity.AddressPO;
 import lombok.Data;
 
 

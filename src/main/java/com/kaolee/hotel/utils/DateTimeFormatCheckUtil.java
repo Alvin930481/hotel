@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * 日期時間格式校驗
  */
 @Slf4j
-public class DateTimeFormatCheck {
+public class DateTimeFormatCheckUtil {
 
     /**
      * 日期時間格式校驗

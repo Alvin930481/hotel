@@ -1,6 +1,6 @@
 package com.kaolee.hotel.controller.home;
 
-import com.kaolee.hotel.pojo.po.NewsPO;
+import com.kaolee.hotel.pojo.entity.NewsPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;

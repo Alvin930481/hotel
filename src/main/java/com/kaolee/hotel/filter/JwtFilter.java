@@ -1,5 +1,6 @@
-package com.kaolee.hotel.utils;
+package com.kaolee.hotel.filter;
 
+import com.kaolee.hotel.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
+    private final JwtUtil jwtService;
     @Override
     protected void doFilterInternal(
             @NotNull HttpServletRequest request,

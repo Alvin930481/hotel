@@ -1,4 +1,4 @@
-package com.kaolee.hotel.pojo.po;
+package com.kaolee.hotel.pojo.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,6 +1,6 @@
 package com.kaolee.hotel;
 
-import com.kaolee.hotel.pojo.po.UserPO;
+import com.kaolee.hotel.pojo.entity.UserPO;
 import com.kaolee.hotel.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

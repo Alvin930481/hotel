@@ -1,7 +1,7 @@
 package com.kaolee.hotel.controller;
 
 
-import com.kaolee.hotel.pojo.po.RoomsPO;
+import com.kaolee.hotel.pojo.entity.RoomsPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;

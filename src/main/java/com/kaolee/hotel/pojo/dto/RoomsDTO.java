@@ -1,6 +1,6 @@
 package com.kaolee.hotel.pojo.dto;
 
-import com.kaolee.hotel.pojo.po.RoomInfoPO;
+import com.kaolee.hotel.pojo.entity.RoomInfoPO;
 
 import lombok.Data;
 

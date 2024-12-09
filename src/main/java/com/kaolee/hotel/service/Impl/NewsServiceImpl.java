@@ -3,7 +3,7 @@ package com.kaolee.hotel.service.Impl;
 import com.kaolee.hotel.constant.MessageConstant;
 import com.kaolee.hotel.exception.NewsNotFoundException;
 import com.kaolee.hotel.pojo.dto.NewsDTO;
-import com.kaolee.hotel.pojo.po.NewsPO;
+import com.kaolee.hotel.pojo.entity.NewsPO;
 import com.kaolee.hotel.repository.NewsRepository;
 import com.kaolee.hotel.service.NewsService;
 import lombok.extern.slf4j.Slf4j;

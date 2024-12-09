@@ -1,7 +1,6 @@
 package com.kaolee.hotel.repository;
 
-import com.kaolee.hotel.pojo.po.RoomsPO;
-import com.kaolee.hotel.pojo.po.UserPO;
+import com.kaolee.hotel.pojo.entity.RoomsPO;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

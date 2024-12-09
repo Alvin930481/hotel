@@ -1,7 +1,7 @@
 package com.kaolee.hotel.service;
 
 import com.kaolee.hotel.pojo.dto.NewsDTO;
-import com.kaolee.hotel.pojo.po.NewsPO;
+import com.kaolee.hotel.pojo.entity.NewsPO;
 
 import java.util.List;
 

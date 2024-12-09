@@ -1,10 +1,9 @@
-package com.kaolee.hotel.pojo.po;
+package com.kaolee.hotel.pojo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,16 +15,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "culinaries")
-public class CulinaryPO {
+@Document(collection = "news")
+public class NewsPO {
     @Id
     private String id;
     private String title;
     private String description;
-    private String diningTime;
     private String image;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
 }

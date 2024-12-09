@@ -8,12 +8,16 @@ import com.kaolee.hotel.pojo.vo.LoginVO;
 import com.kaolee.hotel.pojo.vo.UserVO;
 
 public interface UserService {
+/*
 
-    /**
+    */
+/**
      * 登入操作
      * @param loginInfo
-     */
+     *//*
+
     Response<LoginVO> login(LoginInfo loginInfo);
+*/
 
     /**
      * 用戶註冊

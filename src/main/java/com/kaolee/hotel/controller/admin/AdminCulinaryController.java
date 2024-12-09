@@ -1,7 +1,7 @@
 package com.kaolee.hotel.controller.admin;
 
 import com.kaolee.hotel.pojo.dto.CulinaryDTO;
-import com.kaolee.hotel.pojo.po.CulinaryPO;
+import com.kaolee.hotel.pojo.entity.CulinaryPO;
 import com.kaolee.hotel.pojo.response.Response;
 import com.kaolee.hotel.service.CulinaryService;
 import io.swagger.v3.oas.annotations.Operation;
