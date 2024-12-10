@@ -1,5 +1,6 @@
 package com.kaolee.hotel.service;
 
+import com.kaolee.hotel.pojo.dto.ForgotDTO;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
 import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
@@ -38,4 +39,10 @@ public interface UserService {
      * @param userUpdateDTO
      */
     void update(UserUpdateDTO userUpdateDTO);
+
+    /**
+     * 忘記密碼
+     * @param forgotDTO
+     */
+    void forgot(ForgotDTO forgotDTO);
 }

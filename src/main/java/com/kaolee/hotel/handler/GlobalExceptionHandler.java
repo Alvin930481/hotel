@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
             String msg = email + MessageConstant.ALREADY_EXISTS;
             return Response.failure(msg);
         }else{
-            log.error("未知異常訊息：{}", ex.getMessage());
+            log.error("未知異常訊息：{}", ex);
             return Response.failure(MessageConstant.UNKNOWN_ERROR);
         }
     }

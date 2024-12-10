@@ -2,6 +2,7 @@ package com.kaolee.hotel.controller.user;
 
 import com.kaolee.hotel.constant.JwtClaimsConstant;
 import com.kaolee.hotel.context.BaseContext;
+import com.kaolee.hotel.pojo.dto.ForgotDTO;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
 import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
@@ -58,7 +59,6 @@ public class UserController {
 
     /**
      * 檢查使用者登入
-     *
      * @param request
      * @param response
      * @return
@@ -66,6 +66,7 @@ public class UserController {
     @Operation(tags = {"User-使用者"}, summary = "檢查使用者登入")
     @GetMapping("/check")
     public Response check(HttpServletRequest request, HttpServletResponse response) {
+
         //1、從請求頭中獲取令牌
         String token = request.getHeader(jwtService.getUserTokenName());
 
@@ -90,7 +91,7 @@ public class UserController {
     /**
      * 取得使用者資訊
      *
-     * @return
+     * @return Response<UserVO>
      */
     //TODO:不確定功能，先當作確認session
     @ResponseStatus(HttpStatus.OK)
@@ -113,6 +114,14 @@ public class UserController {
     @PutMapping
     public void userUpdate(@RequestBody UserUpdateDTO userUpdateDTO) {
         userService.update(userUpdateDTO);
+    }
+
+
+    @Operation(tags = {"User-使用者"}, summary = "忘記密碼")
+    @PostMapping("/forgot")
+    public Response forgot(@RequestBody ForgotDTO forgotDTO){
+        userService.forgot(forgotDTO);
+        return Response.success();
     }
 
 

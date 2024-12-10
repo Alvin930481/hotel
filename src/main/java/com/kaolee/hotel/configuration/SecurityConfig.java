@@ -8,6 +8,7 @@ import com.kaolee.hotel.controller.login.usernameLogin.UsernameAuthenticationPro
 import com.kaolee.hotel.filter.jwt.JwtFilter;
 import com.kaolee.hotel.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +37,7 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableMethodSecurity
+@Slf4j
 public class SecurityConfig {
     private final ApplicationContext applicationContext;
     @Autowired
@@ -67,6 +69,7 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain loginFilterChain(HttpSecurity http) throws Exception {
+        log.info("loginFilterChain註冊");
         commonHttpSetting(http);
         http.securityMatcher("/api/v1/user/login")
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
@@ -92,6 +95,7 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain JwtFilterChain(HttpSecurity http) throws Exception {
+        log.info("JwtFilterChain註冊");
         commonHttpSetting(http);
         http
                 .authorizeHttpRequests(auth -> auth
@@ -108,9 +112,11 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()             // 其他路由需要驗證
                 );
 
+
         //jwt校驗
         JwtFilter jwtFilter = new JwtFilter(jwtUtil);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }

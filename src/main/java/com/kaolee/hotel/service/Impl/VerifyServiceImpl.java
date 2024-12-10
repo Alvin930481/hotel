@@ -23,8 +23,8 @@ import java.util.regex.Pattern;
 public class VerifyServiceImpl implements VerifyService {
     @Autowired
     private UserRepository userRepository;
-//    @Autowired
-//    private JavaMailSender mailSender;
+    @Autowired
+    private JavaMailSender mailSender;
 
 
     /**
@@ -39,7 +39,6 @@ public class VerifyServiceImpl implements VerifyService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-/*
 
     @Override
     public void generateEmailCode(EmailDTO emailDTO) {
@@ -50,12 +49,12 @@ public class VerifyServiceImpl implements VerifyService {
         userPO.setVerificationToken(code);
         userRepository.save(userPO);
 //        寄送驗證碼
-        String mailTo="alvin930481@gmail.com";
-        String subject="Test";
-        String body = "TestEmail";
-        sendEmail(mailTo,subject,body);
+        String mailTo = emailDTO.getEmail();
+        String subject = "kaoLee Hotel System 驗證碼";
+        String body = "系統文件，請勿回覆\n驗證碼：" + code;
+        sendEmail(mailTo, subject, body);
     }
-*/
+
 
     /**
      * 驗證Email格式
@@ -73,11 +72,12 @@ public class VerifyServiceImpl implements VerifyService {
 
     /**
      * 生成隨機碼
+     *
      * @return
      */
     private static String generateRandomCode() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder code = null;
+        StringBuilder code = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 5; i++) {
             int randomIndex = random.nextInt(62);
@@ -85,20 +85,20 @@ public class VerifyServiceImpl implements VerifyService {
         }
         return code.toString();
     }
-/*
-    *//**
+
+     /**
      * 寄送郵件
-     * @param to
+     * @param tomail
      * @param subject
      * @param body
-     *//*
-    public void sendEmail(String to, String subject, String body) {
+     */
+    public void sendEmail(String tomail, String subject, String body) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             helper.setFrom("alvin930487@gmail.com");
-            helper.setTo(to);
+            helper.setTo(tomail);
             helper.setSubject(subject);
             helper.setText(body, true);  // 設置為 HTML 格式郵件
 
@@ -107,5 +107,4 @@ public class VerifyServiceImpl implements VerifyService {
             e.printStackTrace();
         }
     }
-    */
 }

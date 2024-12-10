@@ -33,21 +33,18 @@ public class VerifyController {
         return Response.success(isMailExistVO);
     }
 
-/*
 
-    */
 /**
      * 生成信箱驗證碼並寄送
      * @param emailDTO
      * @return
-     *//*
-
+     */
     @Operation(tags = {"Verify - 驗證"}, summary = "生成信箱驗證碼並寄送")
     @PostMapping("/generateEmailCode")
     public Response genetateEmailCode(@RequestBody EmailDTO emailDTO){
         verfyService.generateEmailCode(emailDTO);
         return Response.success();
     }
-*/
+
 
 }

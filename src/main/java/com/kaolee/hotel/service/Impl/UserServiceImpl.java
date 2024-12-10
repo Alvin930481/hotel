@@ -3,6 +3,8 @@ package com.kaolee.hotel.service.Impl;
 
 import com.kaolee.hotel.constant.MessageConstant;
 import com.kaolee.hotel.exception.EmailNotFoundException;
+import com.kaolee.hotel.exception.VerificationException;
+import com.kaolee.hotel.pojo.dto.ForgotDTO;
 import com.kaolee.hotel.pojo.dto.LoginInfo;
 import com.kaolee.hotel.pojo.dto.SignupDTO;
 import com.kaolee.hotel.pojo.dto.UserUpdateDTO;
@@ -149,5 +151,22 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-
+    /**
+     * 忘記密碼
+     * @param forgotDTO
+     */
+    @Override
+    public void forgot(ForgotDTO forgotDTO) {
+        //先查詢並取得是否有這個用戶
+        Optional<UserPO> optionalUserPO = userRepository.findByEmail(forgotDTO.getEmail());
+        UserPO userPO = optionalUserPO
+                .orElseThrow(() -> new EmailNotFoundException(MessageConstant.EMAIL_NOT_FOUND));
+        //驗證code
+        if (userPO.getVerificationToken().equals(forgotDTO.getCode())){
+            //更新密碼
+            userPO.setPassword(forgotDTO.getNewPassword());
+        }else {
+            throw new VerificationException(MessageConstant.VERIFICATION_WRONG);
+        }
+    }
 }

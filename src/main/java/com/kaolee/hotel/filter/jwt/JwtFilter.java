@@ -38,28 +38,29 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwtToken = authorizationHeader.substring(7);
+            try {
+                Claims claims = jwtService.extractAllClaims(jwtToken);
+
+                UserLoginInfo userLoginInfo = UserLoginInfo.builder()
+                        .userId(claims.getId())
+                        .email(claims.getSubject())
+                        .build();
+
+                MyJwtAuthentication authentication = new MyJwtAuthentication();
+                authentication.setJwtToken(jwtToken);
+                authentication.setAuthenticated(true); // 上面解析都沒有錯誤，驗證通過。
+                authentication.setCurrentUser(userLoginInfo);
+                // 驗證通過後，一定要設定到SecurityContextHolder裡面去。
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }catch (ExpiredJwtException e) {
+                //jwt過期
+                throw new JwtException(MessageConstant.JWT_EXPIRED);
+            } catch (Exception e) {
+                throw new JwtException("JWT 無效");
+            }
         }
 
-        try {
-            Claims claims = jwtService.extractAllClaims(jwtToken);
 
-            UserLoginInfo userLoginInfo = UserLoginInfo.builder()
-                    .userId(claims.getId())
-                    .email(claims.getSubject())
-                    .build();
-
-            MyJwtAuthentication authentication = new MyJwtAuthentication();
-            authentication.setJwtToken(jwtToken);
-            authentication.setAuthenticated(true); // 上面解析都沒有錯誤，驗證通過。
-            authentication.setCurrentUser(userLoginInfo);
-            // 驗證通過後，一定要設定到SecurityContextHolder裡面去。
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }catch (ExpiredJwtException e) {
-            //jwt過期
-            throw new JwtException(MessageConstant.JWT_EXPIRED);
-        } catch (Exception e) {
-            throw new JwtException("JWT 無效");
-        }
      /*   if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             if (jwtService.validateToken(jwt, email)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
